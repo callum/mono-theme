@@ -1,0 +1,478 @@
+<!doctype html>
+<html>
+<head>
+<!--
+- Mono v1.0
+- Author: Callum Jefferies (callum@callumj.co.uk)
+- github.com/callum-/mono-theme
+-->
+<meta charset="utf-8">
+<meta name="if:Show post footers" content="1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+{block:Description}
+<meta name="description" content="{MetaDescription}">
+{/block:Description}
+<title>{Title}</title>
+<link rel="alternate" type="application/rss+xml" href="{RSS}">
+<link rel="shortcut icon" href="{Favicon}">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amethysta|Poly:400,400italic">
+<link href="http://static.tumblr.com/qeltg4e/XiXmg0807/normalize.css" rel="stylesheet">
+<style>
+html {
+    font-size: 100%;
+    text-rendering: optimizeLegibility;
+}
+
+body {
+    margin: 8%;
+}
+
+
+/* Typography */
+
+a {
+    text-decoration: underline;
+    color: #111;
+}
+
+a:hover,
+a:active {
+    color: #ff3010;
+}
+
+h1, h2, h3,
+h4, h5, h6 {
+    margin-top: 1.2em;
+    margin-bottom: .6em;
+    font-family: 'Amethysta', 'Times New Roman', serif;
+    font-weight: normal;
+    line-height: 1.2;
+    color: #2e2e2e;
+}
+
+h1 {
+    font-size: 2.375em;}
+h2 {
+    font-size: 1.8125em;}
+h3 {
+    font-size: 1.375em;}
+h4 {
+    font-size: 1.1875em;}
+h5 {
+    font-size: 1em;}
+h6 {
+    font-size: .8125em;}
+
+p, li,
+blockquote {
+    font-family: 'Poly', Georgia, serif;
+    line-height: 1.4;
+    color: #2e2e2e;
+}
+
+ul, .notes {
+    list-style-type: square;
+}
+
+pre, code {
+    font-family: 'Andale Mono', monospace;
+    font-size: .9em;
+}
+
+pre {
+    padding: 1em;
+    border: 1px solid #ddd;
+}
+
+.bigger {
+    font-size: 1.2em;
+}
+
+
+/* Layout */
+
+.inline-list,
+.site-meta,
+.posts-pagination ul,
+.post-meta,
+.post-tags {
+    padding-left: 0;
+    list-style-type: none;
+}
+
+.inline-list li,
+.site-meta li,
+.posts-pagination li,
+.post-meta li,
+.post-tags li {
+    display: inline;
+}
+
+.container {
+    max-width: 40em;
+}
+
+.site-foot {
+    margin-top: 4em;
+    text-align: center;
+}
+
+.posts-head {
+    margin-bottom: 3em;
+}
+
+.posts-pagination ul {
+    margin: 0;
+}
+
+.posts-pagination .next {
+    float: right;
+}
+
+.posts-pagination .prev a,
+.posts-pagination .next a {
+    text-decoration: none;
+    font-size: 1.2em;
+}
+
+.posts-pagination .prev a:before {
+    content: "\2190\a0";}
+.posts-pagination .next a:after {
+    content: "\a0\2192";}
+
+.post {
+    margin-bottom: 4em;
+}
+
+.blog-title {
+    margin-top: 0;
+}
+
+.blog-title a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.divide {
+    position: relative;
+    padding-top: 1.4em;
+    border-top: 1px solid #222;
+}
+
+.reblog {
+    font-style: italic;
+}
+
+.site-meta li:not(:first-child):before,
+.post-meta li:not(:first-child):before {
+    content: "\a0\a0\b7\a0\a0\a";
+}
+
+.post-tags a {
+    display: inline-block;
+    padding: 2px 6px;
+    background-color: #3c3c3c;
+    text-decoration: none;
+    color: #fff;
+}
+
+.post-tags a:hover {
+    background-color: #222;
+}
+
+.notes blockquote,
+.notes blockquote p {
+    margin-top: .5em;
+    margin-bottom: .5em;
+}
+
+.notes .avatar_frame {
+    display: none;
+}
+
+
+/* Post types */
+
+.photo {
+    display: block;
+    max-width: 100%;
+}
+
+.album-artwork {
+    width: 100%;
+    max-width: 15em;
+}
+
+.post--quote .source:before {
+    content: "\2015\a0";
+}
+
+.post--link .post-title {
+    word-wrap: break-word;
+}
+
+.post--link .post-title:before {
+    content: "\21b3\a0";
+}
+
+.post--chat .post-content {
+    list-style: none;
+    padding-left: 0;
+}
+
+.post--chat .label {
+    text-decoration: underline;
+}
+
+.post--audio .track {
+    font-size: 1.3em;
+}
+
+.audio_player {
+    margin-top: 1em;
+}
+
+
+@media (min-width: 62.5em) {
+    body {
+        margin: 5em;
+    }
+}
+
+@media (max-width: 30em) {
+    html {
+        font-size: .875em;
+    }
+
+    .site-foot {
+        margin-top: 3em;}
+    .post {
+        margin-bottom: 3em;}
+}
+
+
+{CustomCSS}
+</style>
+<script src="http://static.tumblr.com/qeltg4e/rt2mg081f/jquery.min.js"></script>
+<script src="http://static.tumblr.com/qeltg4e/gq4mg081p/jquery.fitvids.js"></script>
+</head>
+<body>
+<div class="container">
+<header class="site-head">
+    <h1 class="blog-title"><a href="/">{Title}</a></h1>
+</header>
+
+<section class="posts">
+{block:TagPage}
+<header class="posts-head">
+    <h2>{lang:Posts tagged Tag}</h2>
+</header>
+{/block:TagPage}
+
+{block:DayPage}
+<header class="posts-head">
+    <h2>{lang:Posted on DayOfMonth Month Year}</h2>
+</header>
+{/block:DayPage}
+
+{block:Posts}
+<article class="post post--{PostType}">
+    {block:Text}
+        {block:Title}
+            <header class="post-head">
+                <h2 class="post-title">{Title}</h2>
+            </header>
+        {/block:Title}
+
+        <div class="post-content">
+            {Body}
+        </div>
+    {/block:Text}
+
+    {block:Photo}
+        <figure class="post-content">
+            {LinkOpenTag}
+                <img class="photo" src="{PhotoURL-500}" alt="{PhotoAlt}">
+            {LinkCloseTag}
+            {block:Caption}
+                <figcaption>
+                    <p>{Caption}</p>
+                </figcaption>
+            {/block:Caption}
+        </figure>
+    {/block:Photo}
+
+    {block:Photoset}
+        <div class="post-content">
+            {block:Photos}
+                <figure>
+                    {LinkOpenTag}
+                        <img class="photo" src="{PhotoURL-500}" alt="{PhotoAlt}">
+                    {LinkCloseTag}
+                    {block:Caption}
+                        <figcaption>
+                            <p>{Caption}</p>
+                        </figcaption>
+                    {/block:Caption}
+                </figure>
+            {/block:Photos}
+        </div>
+
+        {block:Caption}
+            <div class="post-caption">
+                <p>{Caption}</p>
+            </div>
+        {/block:Caption}
+    {/block:Photoset}
+
+    {block:Quote}
+        <blockquote class="post-content">
+            <p>{Quote}</p>
+            {block:Source}
+                <p class="source">{Source}</p>
+            {/block:Source}
+        </blockquote>
+    {/block:Quote}
+
+    {block:Link}
+        <div class="post-content">
+            <h2 class="post-title"><a href="{URL}" {Target}>{Name}</a></h2>
+        </div>
+
+        {block:Description}
+            <div class="post-caption">
+                <p>{Description}</p>
+            </div>
+        {/block:Description}
+    {/block:Link}
+
+    {block:Chat}
+        {block:Title}
+            <header class="post-head">
+                <h2 class="post-title">{Title}</h2>
+            </header>
+        {/block:Title}
+
+        <ol class="post-content">
+            {block:Lines}
+            <li>{block:Label}<span class="label">{Label}</span> {/block:Label}{Line}</li>
+            {/block:Lines}
+        </ol>
+    {/block:Chat}
+
+    {block:Audio}
+        <div class="post-content">
+            {block:AudioEmbed}
+                {AudioEmbed-500}
+            {/block:AudioEmbed}
+
+            {block:AudioPlayer}
+                {block:AlbumArt}
+                    <img class="album-artwork" src="{AlbumArtURL}">
+                {/block:AlbumArt}
+
+                <div class="audio-player">
+                    {AudioPlayerBlack}
+                </div>
+
+                {block:TrackName}
+                    {block:Artist}
+                        <p class="track">{TrackName} &ndash; {Artist}</p>
+                    {/block:Artist}
+                {/block:TrackName}
+            {/block:AudioPlayer}
+        </div>
+
+        {block:Caption}
+            <div class="post-caption">
+                <p>{Caption}</p>
+            </div>
+        {/block:Caption}
+    {/block:Audio}
+
+    {block:Video}
+        <div class="post-content">
+            {Video-700}
+            {VideoEmbed-700}
+        </div>
+
+        {block:Caption}
+            <div class="post-caption">
+                <p>{Caption}</p>
+            </div>
+        {/block:Caption}
+    {/block:Video}
+
+    {block:Answer}
+        <div class="post-content">
+            <h3>{lang:Asker asked}</h3>
+            <p>{Question}</p>
+
+            <h4>Answer:</h4>
+            <p>{Answer}</p>
+        </div>
+    {/block:Answer}
+
+    {block:IfShowPostFooters}
+        <footer class="post-foot">
+            {block:RebloggedFrom}
+                <p class="reblog">Via <a href="{ReblogParentURL}">{ReblogParentTitle}</a></p>
+            {/block:RebloggedFrom}
+
+            <ul class="post-meta">
+                <li><time class="post-date">{DayOfMonthWithZero} {ShortMonth} {Year}</time></li>
+                {block:ContentSource}
+                <li><a href="{SourceURL}" title="Source: {SourceTitle}">{lang:Source}</a></li>
+                {/block:ContentSource}
+                <li><a href="{Permalink}">{lang:Permalink}</a></li>
+            </ul>
+
+            {block:PermalinkPage}
+                {block:HasTags}
+                    <ul class="post-tags">
+                        {block:Tags}
+                            <li><a href="{TagURL}">{Tag}</a></li>
+                        {/block:Tags}
+                    </ul>
+                {/block:HasTags}
+            {/block:PermalinkPage}
+
+            {block:PostNotes}
+                <h3 class="divide">{NoteCountWithLabel}</h3>
+
+                {PostNotes}
+            {/block:PostNotes}
+        </footer>
+    {/block:IfShowPostFooters}
+</article>
+{/block:Posts}
+
+<footer class="posts-foot">
+    {block:Pagination}
+    <nav class="posts-pagination">
+        <ul>
+            {block:PreviousPage}
+            <li class="prev"><a href="{PreviousPage}">{lang:Prev}</a></li>
+            {/block:PreviousPage}
+            {block:NextPage}
+            <li class="next"><a href="{NextPage}">{lang:Next}</a></li>
+            {/block:NextPage}
+        <ul>
+    </nav>
+    {/block:Pagination}
+</footer>
+</section>
+
+<footer class="site-foot">
+    <ul class="site-meta">
+        <li><a href="{RSS}">RSS</a></li>
+        <li><a href="/archive" title="Browse the Archive">{lang:Archive}</a></li>
+    </ul>
+</footer>
+</div>
+
+<script>
+$('.post--video').fitVids();
+</script>
+</body>
+</html>
